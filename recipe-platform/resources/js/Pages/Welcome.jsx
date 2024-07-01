@@ -58,7 +58,7 @@ const Welcome = ({ auth }) => {
                                     </p>
                                     <div className="flex justify-center lg:justify-start">
                                         <Link
-                                            href={route('recipes.index')}
+                                            href={route('recipes.guest')}
                                             className="bg-pink-500 text-white px-6 py-3 rounded-md shadow-md hover:bg-pink-600 transition duration-300 ease-in-out"
                                         >
                                             Get Started

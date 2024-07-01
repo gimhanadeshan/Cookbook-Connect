@@ -35,11 +35,12 @@ class UserController extends Controller
 
     public function makeAdmin(User $user)
     {
-        // Make user an admin
+        if(auth()->user()->is_admin){
         $user->is_admin = true;
         $user->save();
 
         return redirect()->back();
+        }
     }
 
     public function removeAdmin(User $user)
@@ -48,6 +49,12 @@ class UserController extends Controller
         $user->is_admin = false;
         $user->save();
 
+       if(!auth()->user()->is_admin){
         return redirect()->route('recipes.index');
+       }else{
+        return back();
+       }
+
+       
     }
 }

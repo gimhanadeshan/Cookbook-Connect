@@ -41,30 +41,30 @@ class RecipeController extends Controller
             ]
         ]);
     }
+
+    
     // In RecipeController.php
-public function getMyRecipe()
-{
-    $user = Auth::user();
-
-    if (Auth::check()) {
-        $recipes = Recipe::with('reviews')->where('user_id', $user->id)
-                        ->orWhere('published', true)
-                        ->get();
-    } else {
-        $recipes = Recipe::with('reviews')->where('published', true)
-                        ->get();
+    public function getMyRecipe()
+    {
+        $user = Auth::user();
+    
+        if (Auth::check()) {
+            $recipes = Recipe::with('reviews')->where('user_id', $user->id)->get();
+        } else {
+            $recipes = Recipe::with('reviews')->where('published', true)->get();
+        }
+    
+        $categories = Category::all();
+    
+        return Inertia::render('Recipes/MyRecipes', [
+            'recipes' => $recipes,
+            'categories' => $categories,
+            'auth' => [
+                'user' => $user
+            ]
+        ]);
     }
-
-    $categories = Category::all();
-
-    return Inertia::render('Recipes/MyRecipes', [
-        'recipes' => $recipes,
-        'categories' => $categories,
-        'auth' => [
-            'user' => $user
-        ]
-    ]);
-}
+    
 
     public function manage()
     {
@@ -258,6 +258,8 @@ public function getMyRecipe()
     
         $html .= '<div class="content">';
         $html .= '<p><strong>Description:</strong> ' . $recipe->description . '</p>';
+        $html .= '<p><strong>Category:</strong> ' . $recipe->category->name . '</p>';
+        $html .= '<p><strong>Created By:</strong> ' . $recipe->user->name . '</p>';
         $html .= '</div>';
     
         $html .= '<div class="ingredients">';

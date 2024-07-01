@@ -28,7 +28,7 @@ const Footer = () => {
                                         href="#"
                                         className="hover:text-524A4E hover:underline"
                                     >
-                                        Flowbite
+                                        Youtube
                                     </a>
                                 </li>
                                 <li>
@@ -36,7 +36,7 @@ const Footer = () => {
                                         href="#"
                                         className="hover:text-524A4E hover:underline"
                                     >
-                                        Tailwind CSS
+                                        Other
                                     </a>
                                 </li>
                             </ul>
@@ -51,7 +51,7 @@ const Footer = () => {
                                         href="#"
                                         className="hover:text-524A4E hover:underline"
                                     >
-                                        Github
+                                        Facebook
                                     </a>
                                 </li>
                                 <li>
@@ -59,7 +59,7 @@ const Footer = () => {
                                         href="#"
                                         className="hover:text-524A4E hover:underline"
                                     >
-                                        Discord
+                                        Instergram
                                     </a>
                                 </li>
                             </ul>

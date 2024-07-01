@@ -17,15 +17,12 @@ const Show = ({ recipe, auth, reviews, recipes }) => {
     const [currentReview, setCurrentReview] = useState(null);
     const [showReviews, setShowReviews] = useState(true);
 
-
-
     const handleDelete = (reviewId, e) => {
         if (confirm("Are you sure you want to delete this review?")) {
-            Inertia.delete(route('reviews.delete',reviewId));
+            Inertia.delete(route("reviews.delete", reviewId));
             e.target;
         }
     };
-
 
     const handleDeleteRecipe = (recipeId) => {
         if (confirm("Are you sure you want to delete this recipe?")) {
@@ -40,7 +37,7 @@ const Show = ({ recipe, auth, reviews, recipes }) => {
     };
 
     const handleDownloadPdf = () => {
-        window.location.href =route('recipes.downloadpdf',recipe.id);
+        window.location.href = route("recipes.downloadpdf", recipe.id);
     };
 
     const ingredientsList = recipe.ingredients.split("\n");
@@ -120,7 +117,8 @@ const Show = ({ recipe, auth, reviews, recipes }) => {
                                 </div>
 
                                 <p className="mb-4 text-sm text-gray-500">
-                                    Added {moment(recipe.created_at).fromNow()} by {recipe.user.name} 
+                                    Added {moment(recipe.created_at).fromNow()}{" "}
+                                    by {recipe.user.name}
                                 </p>
 
                                 {auth.user &&
@@ -173,20 +171,22 @@ const Show = ({ recipe, auth, reviews, recipes }) => {
                                                     >
                                                         login
                                                     </Link>{" "}
-                                                    to add a review.
+                                                    to add a review and download recipe.
                                                 </p>
                                             )}
                                         </div>
 
                                         {/* Print and Download Buttons */}
-                                        <div className="mt-8 flex justify-center">
-                                            <button
-                                                onClick={handleDownloadPdf}
-                                                className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded"
-                                            >
-                                                Download Recipe
-                                            </button>
-                                        </div>
+                                        {auth.user && (
+                                            <div className="mt-8 flex justify-center">
+                                                <button
+                                                    onClick={handleDownloadPdf}
+                                                    className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded"
+                                                >
+                                                    Download Recipe
+                                                </button>
+                                            </div>
+                                        )}
                                     </>
                                 ) : (
                                     <div className="text-center mt-4">

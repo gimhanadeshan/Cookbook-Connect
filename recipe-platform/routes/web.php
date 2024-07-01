@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 Route::resource('recipes', RecipeController::class);
+Route::get('/guest', [RecipeController::class, 'index'])->name('recipes.guest');
 Route::get('/recipes/category/{category}', [RecipeController::class, 'recipesByCategory'])->name('recipes.byCategory');
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');
@@ -53,8 +54,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/recipes/{recipe}/edit', [RecipeController::class,'edit'])->name('recipes.edit');
     Route::put('/recipes/{recipe}/update', [RecipeController::class, 'update'])->name('recipes.update');
    
-   
-
     Route::get('/recipes', [RecipeController::class, 'getMyRecipe'])->name('recipes.getMyRecipe');
 
    

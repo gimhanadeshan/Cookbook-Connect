@@ -11,7 +11,7 @@ export default function Authenticated({ user, header, children }) {
         useState(false);
 
     return (
-        <div className="min-h-screen bg-gray-100">
+        <div className="min-h-screen flex flex-col bg-gray-100">
             {/* Sticky Navbar */}
             <nav className="bg-[#524A4E] text-white border-b border-gray-200 sticky top-0 z-50 shadow-md">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -287,7 +287,7 @@ export default function Authenticated({ user, header, children }) {
                                 </div>
                             </>
                         ) : (
-                            <div className="px-4">
+                            <div className="mt-3 space-y-1">
                                 <ResponsiveNavLink
                                     href={route("login")}
                                     className="text-white hover:text-gray-300"
@@ -306,7 +306,7 @@ export default function Authenticated({ user, header, children }) {
                 </div>
             </nav>
 
-            {/* Header Section */}
+            {/* Page Heading */}
             {header && (
                 <header className="bg-white shadow">
                     <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -315,11 +315,10 @@ export default function Authenticated({ user, header, children }) {
                 </header>
             )}
 
-            {/* Main Content */}
-            <main>{children}</main>
+            {/* Page Content */}
+            <main className="flex-grow">{children}</main>
 
             {/* Footer */}
-
             <Footer />
         </div>
     );

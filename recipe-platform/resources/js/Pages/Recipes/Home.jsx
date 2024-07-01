@@ -25,10 +25,10 @@ const Home = ({ recipes, categories, auth, reviews }) => {
         const term = e.target.value;
         setSearchTerm(term);
         setCurrentPage(1);
-        e.target
+        e.target;
     };
 
-    const toggleCategory = (categoryId,e) => {
+    const toggleCategory = (categoryId, e) => {
         setSelectedCategories((prevSelected) => {
             if (prevSelected.includes(categoryId)) {
                 return prevSelected.filter((id) => id !== categoryId);
@@ -40,13 +40,13 @@ const Home = ({ recipes, categories, auth, reviews }) => {
         e.target;
     };
 
-    const handleRadioChange = (filterValue,e) => {
+    const handleRadioChange = (filterValue, e) => {
         setRadioFilter(filterValue);
         setCurrentPage(1);
         e.target;
     };
 
-    const handleSingleCategoryChange = (categoryId,e) => {
+    const handleSingleCategoryChange = (categoryId, e) => {
         setSingleCategoryFilter(categoryId);
         setCurrentPage(1);
         e.target;
@@ -113,7 +113,24 @@ const Home = ({ recipes, categories, auth, reviews }) => {
             <div className="py-12 bg-[#FDEFF4]">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                       
+                        {/* Sidebar for filters */}
+                        <div className="col-span-1 md:col-span-1">
+                            <Sidebar
+                                categories={categories}
+                                selectedCategories={selectedCategories}
+                                toggleCategory={toggleCategory}
+                                singleCategoryFilter={singleCategoryFilter}
+                                handleSingleCategoryChange={
+                                    handleSingleCategoryChange
+                                }
+                                radioFilter={radioFilter}
+                                handleRadioChange={handleRadioChange}
+                                auth={auth}
+                                handleSearchChange={handleSearchChange}
+                            />
+                            <br />
+                            <RecentRecipesSidebar recipes={recipes} />
+                        </div>
 
                         {/* Recipes display */}
                         <div className="col-span-3">
@@ -227,28 +244,6 @@ const Home = ({ recipes, categories, auth, reviews }) => {
                             <br />
                             <CategoriesSidebar categories={categories} />
                         </div>
-                        
-                         {/* Sidebar for filters */}
-                         <div className="col-span-1 md:col-span-1">
-                            <Sidebar
-                                categories={categories}
-                                selectedCategories={selectedCategories}
-                                toggleCategory={toggleCategory}
-                                singleCategoryFilter={singleCategoryFilter}
-                                handleSingleCategoryChange={
-                                    handleSingleCategoryChange
-                                }
-                                radioFilter={radioFilter}
-                                handleRadioChange={handleRadioChange}
-                                auth={auth}
-                                handleSearchChange={handleSearchChange}
-                            />
-                            <br />
-                            <RecentRecipesSidebar recipes={recipes} />
-                        </div>
-                       
-
-                       
                     </div>
                 </div>
             </div>

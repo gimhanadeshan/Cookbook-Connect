@@ -4,7 +4,7 @@ import { Head } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Link } from "@inertiajs/react";
 
-const Edit = ({ recipe, auth, categories, flash }) => {
+const Edit = ({ recipe, auth, categories }) => {
     const [title, setTitle] = useState(recipe.title);
     const [description, setDescription] = useState(recipe.description);
     const [ingredients, setIngredients] = useState(recipe.ingredients);
@@ -13,6 +13,7 @@ const Edit = ({ recipe, auth, categories, flash }) => {
         recipe.category_id || ""
     );
     const [published, setPublished] = useState(recipe.published);
+    const [image, setImage] = useState(null);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -122,6 +123,19 @@ const Edit = ({ recipe, auth, categories, flash }) => {
                                 ></textarea>
                             </div>
                             <div>
+                            <label className="block text-sm font-medium text-gray-700">
+                                Image
+                            </label>
+                            {recipe.image && (
+                                <img
+                                src={`/storage/${recipe.image}`}
+                                    alt={title}
+                                    className="mt-2 rounded-lg shadow-md max-h-64"
+                                />
+                            )}
+                        </div>
+
+                            <div>
                                 <label className="block text-sm font-medium text-gray-700">
                                     Publish
                                 </label>
@@ -134,6 +148,7 @@ const Edit = ({ recipe, auth, categories, flash }) => {
                                     className="mt-1"
                                 />
                             </div>
+                            
                             <button
                                 type="submit"
                                 className="bg-green-500 text-white py-2 px-4 rounded"

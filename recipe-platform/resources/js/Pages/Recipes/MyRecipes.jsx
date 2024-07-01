@@ -12,9 +12,10 @@ const MyRecipes = ({ auth, recipes, categories }) => {
     const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
-        setUserRecipes(recipes);
-        generateChartData(recipes);
-        generateDailyReviewData(recipes);
+        const ownRecipes = recipes.filter(recipe => recipe.user_id === auth.user.id);
+        setUserRecipes(ownRecipes);
+        generateChartData(ownRecipes);
+        generateDailyReviewData(ownRecipes);
     }, [recipes]);
 
     const handleDeleteRecipe = (recipeId) => {
@@ -23,9 +24,10 @@ const MyRecipes = ({ auth, recipes, categories }) => {
                 .then(() => {
                     Inertia.get("/recipes/getMyRecipe")
                         .then((response) => {
-                            setUserRecipes(response.data.recipes);
-                            generateChartData(response.data.recipes);
-                            generateDailyReviewData(response.data.recipes);
+                            const ownRecipes = response.data.recipes.filter(recipe => recipe.user_id === auth.user.id);
+                            setUserRecipes(ownRecipes);
+                            generateChartData(ownRecipes);
+                            generateDailyReviewData(ownRecipes);
                         })
                         .catch((error) => {
                             console.error(
@@ -181,7 +183,7 @@ const MyRecipes = ({ auth, recipes, categories }) => {
                                                             </button>
                                                         </div>
                                                         {!recipe.published && (
-                                                            <div className="mt-2 text-red-500" >
+                                                            <div className="mt-2 text-red-500">
                                                                 This recipe is not yet published
                                                             </div>
                                                         )}
